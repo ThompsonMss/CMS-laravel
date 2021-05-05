@@ -9,6 +9,10 @@ class LoginController extends Controller
 {
     public function index()
     {
-        echo 'oi';
+        return view('admin.login');
+    }
+
+    public function authenticate(){
+
     }
 }
