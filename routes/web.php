@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController as SiteHomeController;
+
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +20,6 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 Route::get('/', [SiteHomeController::class, 'index']);
 
 Route::prefix('painel')->group(function () {
-    Route::get('/', [AdminHomeController::class, 'index']);
+    Route::get('/', [AdminHomeController::class, 'index'])->name('admin');
+    Route::get('login', [LoginController::class, 'index'])->name('login');
 });
