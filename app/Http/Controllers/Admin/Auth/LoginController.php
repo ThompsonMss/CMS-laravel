@@ -3,16 +3,33 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\Admin\LoginService;
+use Illuminate\Support\Facades\Request;
 
 class LoginController extends Controller
 {
-    public function index()
+
+    private $service;
+
+    public function __construct(LoginService $service)
     {
-        return view('admin.login');
+        $this->service = $service;
     }
 
-    public function authenticate(){
+    public function index()
+    {
+        return $this->service->index();
+    }
 
+    public function authenticate()
+    {
+        $data = Request::only(['email', 'password', 'remember']);
+
+        return $this->service->authenticate($data);
+    }
+
+    public function logout()
+    {
+        return $this->service->logout();
     }
 }
