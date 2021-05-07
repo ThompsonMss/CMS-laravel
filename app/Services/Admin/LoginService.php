@@ -21,8 +21,12 @@ class LoginService
             return redirect()->route('login')->withErrors($validator)->withInput();
         }
 
-        $remember = $data['remember'];
-        unset($data['remember']);
+        $remember = false;
+
+        if (array_key_exists('remember', $data)) {
+            $remember = $data['remember'];
+            unset($data['remember']);
+        }
 
         if (Auth::attempt($data, $remember)) {
             return redirect()->route('admin');
