@@ -23,7 +23,8 @@ class UserService
         $users = $this->model->orderBy('id', 'asc')->paginate(10);
 
         return view('admin.users.index', [
-            'users' => $users
+            'users' => $users,
+            'loggedId' => Auth::id()
         ]);
     }
 

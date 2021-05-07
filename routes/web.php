@@ -22,7 +22,6 @@ use App\Http\Controllers\Admin\UserController;
 Route::get('/', [SiteHomeController::class, 'index']);
 
 Route::prefix('painel')->group(function () {
-    Route::get('/', [AdminHomeController::class, 'index'])->name('admin');
 
     Route::get('login', [LoginController::class, 'index'])->name('login');
     Route::post('login', [LoginController::class, 'authenticate']);
@@ -32,5 +31,9 @@ Route::prefix('painel')->group(function () {
     Route::get('register', [RegisterController::class, 'index'])->name('register');
     Route::post('register', [RegisterController::class, 'create']);
 
-    Route::resource('users', UserController::class);
+    Route::middleware('auth')->group(function () {
+
+        Route::get('/', [AdminHomeController::class, 'index'])->name('admin');
+        Route::resource('users', UserController::class);
+    });
 });
