@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Novo Usuário')
+@section('title', 'Editar Usuário')
 
 @section('content_header')
-    <h1>Novo Usuário</h1>
+    <h1>Editar Usuário</h1>
 @endsection
 
 @section('content')
@@ -20,26 +20,24 @@
     @endif
 
     <div class="card">
-
         <div class="card-body">
-            <form action="{{ route('users.store') }}" method="POST" class="form-horizontal">
+            <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST" class="form-horizontal">
                 @csrf
+                @method('PUT')
 
                 <div class="form-group row">
-
                     <label class="col-sm-4 col-form-label">Nome completo</label>
                     <div class="col-sm-8">
-                        <input type="text" value="{{ old('name') }}" name="name"
+                        <input type="text" value="{{ $user->name }}" name="name"
                             class="form-control @error('name') is-invalid @enderror" />
                     </div>
-
                 </div>
                 <hr />
                 <div class="form-group row">
 
                     <label class="col-sm-4 col-form-label">E-mail</label>
                     <div class="col-sm-8">
-                        <input type="email" name="email" value="{{ old('email') }}"
+                        <input type="email" name="email" value="{{ $user->email }}"
                             class="form-control @error('email') is-invalid @enderror" />
                     </div>
 
@@ -47,7 +45,7 @@
                 <hr />
                 <div class="form-group row">
 
-                    <label class="col-sm-4 col-form-label">Senha</label>
+                    <label class="col-sm-4 col-form-label">Nova Senha</label>
                     <div class="col-sm-8">
                         <input type="password" name="password"
                             class="form-control @error('password') is-invalid @enderror" />
@@ -69,7 +67,7 @@
 
                     <label class="col-sm-4 col-form-label"></label>
                     <div class="col-sm-8">
-                        <input type="submit" value="Cadastrar" class="btn btn-success" />
+                        <input type="submit" value="Salvar" class="btn btn-success" />
                     </div>
 
                 </div>

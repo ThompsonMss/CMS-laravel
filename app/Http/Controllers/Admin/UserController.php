@@ -73,7 +73,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->service->edit($id);
     }
 
     /**
@@ -85,7 +85,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->only([
+            'name',
+            'email',
+            'password',
+            'password_confirmation'
+        ]);
+
+        return $this->service->update($data, $id);
     }
 
     /**
