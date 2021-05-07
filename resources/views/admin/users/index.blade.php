@@ -30,8 +30,15 @@
                             <td>
                                 <a href="{{ route('users.edit', ['user' => $user->id]) }}"
                                     class="btn btn-sm btn-info">Editar</a>
-                                <a href="{{ route('users.destroy', ['user' => $user->id]) }}"
-                                    class="btn btn-sm btn-danger">Excluír</a>
+
+                                <form class="d-inline" method="POST"
+                                    onsubmit="return confirm('Tem certeza que deseja excluír?')"
+                                    action="{{ route('users.destroy', ['user' => $user->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input class="btn btn-sm btn-danger" value="Excluír" type="submit" />
+                                </form>
+
                             </td>
                         </tr>
                     @endforeach

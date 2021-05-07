@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -19,7 +20,7 @@ class UserService
     public function index()
     {
 
-        $users = $this->model->paginate(10);
+        $users = $this->model->orderBy('id', 'asc')->paginate(10);
 
         return view('admin.users.index', [
             'users' => $users
@@ -108,8 +109,13 @@ class UserService
         return redirect()->route('users.index');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+        if (Auth::id() != $id) {
+            $this->model->where('id', $id)->delete();
+        }
+
+        return redirect()->route('users.index');
     }
 
     public function validatorStore(array $data)
