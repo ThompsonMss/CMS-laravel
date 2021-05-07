@@ -6,6 +6,7 @@ use App\Http\Controllers\Site\HomeController as SiteHomeController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,6 @@ Route::prefix('painel')->group(function () {
 
     Route::get('register', [RegisterController::class, 'index'])->name('register');
     Route::post('register', [RegisterController::class, 'create']);
+
+    Route::resource('users', UserController::class);
 });
