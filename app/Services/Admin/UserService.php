@@ -19,7 +19,7 @@ class UserService
     public function index()
     {
 
-        $users = $this->model->all();
+        $users = $this->model->paginate(10);
 
         return view('admin.users.index', [
             'users' => $users

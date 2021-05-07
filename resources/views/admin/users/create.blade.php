@@ -10,7 +10,7 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <h4>Erro</h4>
+            <h4><i class="icon fas fa-ban"></i>Erro</h4>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -19,48 +19,63 @@
         </div>
     @endif
 
-    <form action="{{ route('users.store') }}" method="POST" class="form-horizontal">
-        @csrf
-        <div class="form-group">
-            <div class="box-body">
-                <label class="col-sm-4 control-label">Nome completo</label>
-                <div class="col-sm-8">
-                    <input type="text" value="{{ old('name') }}" name="name" class="form-control" />
+    <div class="card">
+
+        <div class="card-body">
+            <form action="{{ route('users.store') }}" method="POST" class="form-horizontal">
+                @csrf
+
+                <div class="form-group row">
+
+                    <label class="col-sm-4 col-form-label">Nome completo</label>
+                    <div class="col-sm-8">
+                        <input type="text" value="{{ old('name') }}" name="name"
+                            class="form-control @error('name') is-invalid @enderror" />
+                    </div>
+
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="box-body">
-                <label class="col-sm-4 control-label">E-mail</label>
-                <div class="col-sm-8">
-                    <input type="email" name="email" value="{{ old('email') }}" class="form-control" />
+                <hr />
+                <div class="form-group row">
+
+                    <label class="col-sm-4 col-form-label">E-mail</label>
+                    <div class="col-sm-8">
+                        <input type="email" name="email" value="{{ old('email') }}"
+                            class="form-control @error('email') is-invalid @enderror" />
+                    </div>
+
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="box-body">
-                <label class="col-sm-4 control-label">Senha</label>
-                <div class="col-sm-8">
-                    <input type="password" name="password" class="form-control" />
+                <hr />
+                <div class="form-group row">
+
+                    <label class="col-sm-4 col-form-label">Senha</label>
+                    <div class="col-sm-8">
+                        <input type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror" />
+                    </div>
+
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="box-body">
-                <label class="col-sm-4 control-label">Confirmação da Senha</label>
-                <div class="col-sm-8">
-                    <input type="password" name="password_confirmation" class="form-control" />
+                <hr />
+                <div class="form-group row">
+
+                    <label class="col-sm-4 col-form-label">Senha Novamente</label>
+                    <div class="col-sm-8">
+                        <input type="password" name="password_confirmation"
+                            class="form-control @error('password') is-invalid @enderror" />
+                    </div>
+
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="box-body">
-                <label class="col-sm-4 control-label"></label>
-                <div class="col-sm-8">
-                    <input type="submit" value="Cadastrar" class="btn btn-success" />
+
+                <div class="form-group row">
+
+                    <label class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <input type="submit" value="Cadastrar" class="btn btn-success" />
+                    </div>
+
                 </div>
-            </div>
+
+            </form>
         </div>
-    </form>
+    </div>
     </div>
 @endsection
