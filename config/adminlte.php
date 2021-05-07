@@ -227,17 +227,17 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'painel',
-            'icon'        => 'far fa-fw fa-file'
+            'icon'        => 'fas fa-tachometer-alt'
         ],
         [
             'text'        => 'Minhas páginas',
             'url'         => 'painel/pages',
-            'icon'        => 'far fa-fw fa-file'
+            'icon'        => 'fas fa-file'
         ],
         [
             'text'        => 'Meus usuários',
             'url'         => 'painel/users',
-            'icon'        => 'far fa-fw fa-file'
+            'icon'        => 'fas fa-users'
         ],
         ['header' => 'account_settings'],
         [

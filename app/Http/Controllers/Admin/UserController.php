@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return $this->service->create();
     }
 
     /**
@@ -44,7 +44,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->only([
+            'name',
+            'email',
+            'password',
+            'password_confirmation'
+        ]);
+
+        return $this->service->store($data);
     }
 
     /**
