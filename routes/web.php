@@ -34,6 +34,9 @@ Route::prefix('painel')->group(function () {
     Route::middleware('auth')->group(function () {
 
         Route::get('/', [AdminHomeController::class, 'index'])->name('admin');
-        Route::resource('users', UserController::class);
+
+        Route::middleware('can:edit-users')->group(function () {
+            Route::resource('users', UserController::class);
+        });
     });
 });
