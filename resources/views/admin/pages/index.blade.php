@@ -24,7 +24,7 @@
                     @foreach ($pages as $page)
                         <tr>
                             <td>{{ $page->id }}</td>
-                            <td>{{ $page->titulo }}</td>
+                            <td>{{ $page->title }}</td>
                             <td>
                                 <a href="{{ route('pages.edit', ['page' => $page->id]) }}"
                                     class="btn btn-sm btn-info">Editar</a>

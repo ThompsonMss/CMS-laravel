@@ -25,9 +25,14 @@ class PageController extends Controller
         return $this->service->create();
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return $this->service->store();
+        $data = $request->only([
+            'title',
+            'body'
+        ]);
+
+        return $this->service->store($data);
     }
 
     public function edit()

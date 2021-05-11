@@ -3,7 +3,7 @@
 namespace App\Services\Admin;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\Page;
 
 class PageService
@@ -27,10 +27,28 @@ class PageService
 
     public function create()
     {
+        return view('admin.pages.create');
     }
 
-    public function store()
+    public function store(array $data)
     {
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        $validator = $this->validatorStore($data);
+
+        if ($validator->fails()) {
+            return redirect()->route('pages.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $this->model->create([
+            'title' => $data['title'],
+            'slug' => $data['slug'],
+            'body' => $data['body']
+        ]);
+
+        return redirect()->route('pages.index');
     }
 
     public function edit()
@@ -47,5 +65,23 @@ class PageService
 
     public function destroy()
     {
+    }
+
+    public function validatorStore(array $data)
+    {
+        return Validator::make($data, [
+            'title' => 'required|string|max:100',
+            'slug' => 'required|string|max:100|unique:pages',
+            'body' => 'string'
+        ]);
+    }
+
+    public function validatorUpdate(array $data)
+    {
+        return Validator::make($data, [
+            'title' => 'required|string|max:100',
+            'slug' => 'required|string|max:100|unique:pages',
+            'body' => 'string'
+        ]);
     }
 }
