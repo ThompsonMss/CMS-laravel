@@ -20,4 +20,9 @@ class SettingController extends Controller
     {
         return $this->service->index();
     }
+
+    public function save()
+    {
+        return $this->service->save([]);
+    }
 }

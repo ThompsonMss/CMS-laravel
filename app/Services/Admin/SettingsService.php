@@ -16,6 +16,19 @@ class SettingsService
 
     public function index()
     {
-        return view('admin.settings.index');
+
+        $settings = [];
+
+        $dbSettings = $this->model->get();
+
+        foreach ($dbSettings as $dbSetting) {
+            $settings[$dbSetting['name']] = $dbSetting['content'];
+        }
+
+        return view('admin.settings.index', ['settings' => $settings]);
+    }
+
+    public function save(array $data)
+    {
     }
 }
