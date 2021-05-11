@@ -243,7 +243,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Configurações do Site',
-            'url'  => 'painel/setting',
+            'url'  => 'painel/settings',
             'icon' => 'fas fa-cog',
         ],
         [

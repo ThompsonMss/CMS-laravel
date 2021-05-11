@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,7 @@ Route::prefix('painel')->group(function () {
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::put('/profile/save', [ProfileController::class, 'save'])->name('profile.save');
+
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings');
     });
 });
