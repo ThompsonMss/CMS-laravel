@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,8 @@ Route::prefix('painel')->group(function () {
         Route::middleware('can:edit-users')->group(function () {
             Route::resource('users', UserController::class);
         });
+
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        Route::put('/profile/save', [ProfileController::class, 'save'])->name('profile.save');
     });
 });
