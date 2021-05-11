@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +47,7 @@ Route::prefix('painel')->group(function () {
 
         Route::get('/settings', [SettingController::class, 'index'])->name('settings');
         Route::put('/settings/save', [SettingController::class, 'save'])->name('settings.save');
+
+        Route::resource('pages', PageController::class);
     });
 });
