@@ -7,6 +7,24 @@
 @stop
 
 @section('content')
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <h4><i class="icon fas fa-ban"></i>Erro</h4>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('warning'))
+        <div class="alert alert-success">
+            {{ session('warning') }}
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-body">
             <form action="{{ route('settings.save') }}" method="POST" class="form-horizontal">

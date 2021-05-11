@@ -21,8 +21,11 @@ class SettingController extends Controller
         return $this->service->index();
     }
 
-    public function save()
+    public function save(Request $request)
     {
-        return $this->service->save([]);
+
+        $data = $request->only(['title', 'subtitle', 'email', 'bgcolor', 'textcolor']);
+
+        return $this->service->save($data);
     }
 }
