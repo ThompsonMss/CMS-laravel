@@ -68,7 +68,7 @@ class ProfileService
             ]);
         }
 
-        return redirect()->route('users.index');
+        return redirect()->route('profile')->with('warning', 'Informações alteradas com sucesso!');
     }
 
     public function validatorUpdate(array $data)
