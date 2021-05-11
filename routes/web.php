@@ -45,5 +45,6 @@ Route::prefix('painel')->group(function () {
         Route::put('/profile/save', [ProfileController::class, 'save'])->name('profile.save');
 
         Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+        Route::put('/settings/save', [SettingController::class, 'save'])->name('settings.save');
     });
 });
