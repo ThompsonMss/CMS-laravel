@@ -35,9 +35,9 @@ class PageController extends Controller
         return $this->service->store($data);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return $this->service->edit();
+        return $this->service->edit($id);
     }
 
     public function show()
@@ -45,13 +45,18 @@ class PageController extends Controller
         return $this->service->show();
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-        return $this->service->update();
+
+        $data = $request->only([
+            'title', 'body'
+        ]);
+
+        return $this->service->update($data, $id);
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        return $this->service->destroy();
+        return $this->service->destroy($id);
     }
 }

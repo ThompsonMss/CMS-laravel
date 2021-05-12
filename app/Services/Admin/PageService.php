@@ -51,20 +51,56 @@ class PageService
         return redirect()->route('pages.index');
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $page = $this->model->find($id);
+
+        if ($page) {
+            return view('admin.pages.edit', ['page' => $page]);
+        }
+
+        return redirect()->route('pages.index');
     }
 
     public function show()
     {
     }
 
-    public function update()
+    public function update(array $data, $id)
     {
+        $page = $this->model->find($id);
+
+        if ($page) {
+
+
+            $temTitle = $page['title'] != $data['title'] ? true : false;
+
+            if ($temTitle) {
+                $data['slug'] = Str::slug($data['title'], '-');
+            }
+
+            $validator = $this->validatorUpdate($data, $temTitle);
+
+            if ($validator->fails()) {
+                return redirect()->route('pages.edit', ['page' => $id])->withErrors($validator)->withInput();
+            }
+
+            $this->model->where('id', $id)->update([
+                'title' => $data['title'],
+                'slug'  => isset($data['slug']) ? $data['slug'] : $page['slug'],
+                'body'  => $data['body'],
+            ]);
+        }
+
+        return redirect()->route('pages.index');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+
+        $this->model->where('id', $id)->delete();
+
+        return redirect()->route('pages.index');
     }
 
     public function validatorStore(array $data)
@@ -76,12 +112,18 @@ class PageService
         ]);
     }
 
-    public function validatorUpdate(array $data)
+    public function validatorUpdate(array $data, $verifySlug = false)
     {
-        return Validator::make($data, [
+
+        $dataValidator = [
             'title' => 'required|string|max:100',
-            'slug' => 'required|string|max:100|unique:pages',
-            'body' => 'string'
-        ]);
+            'body' => 'string',
+        ];
+
+        if ($verifySlug) {
+            $dataValidator['slug'] = 'required|string|max:100|unique:pages';
+        }
+
+        return Validator::make($data, $dataValidator);
     }
 }
