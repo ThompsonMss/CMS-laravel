@@ -16,8 +16,15 @@ class HomeController extends Controller
         $this->service = $service;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->service->index();
+
+        $filters['interval'] = intval($request->input('interval', 30));
+
+        if ($filters['interval'] > 120) {
+            $filters['interval'] = 120;
+        }
+
+        return $this->service->index($filters);
     }
 }

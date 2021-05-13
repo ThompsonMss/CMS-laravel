@@ -5,7 +5,23 @@
 @section('title', 'Painel')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="col-md-6">
+
+            <form action="" method="GET">
+                <select onchange="this.form.submit()" name="interval" class="float-md-right">
+                    <option {{ $dateInterval == 30 ? 'selected="selected' : '' }} value="30">Últimos 30 dias</option>
+                    <option {{ $dateInterval == 60 ? 'selected="selected' : '' }} value="60">Últimos 60 dias</option>
+                    <option {{ $dateInterval == 90 ? 'selected="selected' : '' }} value="90">Últimos 90 dias</option>
+                    <option {{ $dateInterval == 120 ? 'selected="selected' : '' }} value="120">Últimos 120 dias</option>
+                </select>
+            </form>
+
+        </div>
+    </div>
 @stop
 
 @section('content')
