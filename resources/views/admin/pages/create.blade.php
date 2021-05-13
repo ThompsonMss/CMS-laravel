@@ -41,7 +41,7 @@
                     <div class="col-sm-8">
 
                         <textarea name="body" id="body" cols="30" rows="10"
-                            class="form-control">{{ old('body') }}</textarea>
+                            class="form-control bodyfield">{{ old('body') }}</textarea>
                     </div>
 
                 </div>
@@ -59,4 +59,23 @@
         </div>
     </div>
     </div>
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea.bodyfield',
+            height: 300,
+            menubar: false,
+            plugins: ['link', 'table', 'image', 'autoresize', 'lists'],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | table | link image | bullist numlist',
+            content_css: [
+                '{{ asset('assets/css/content.css') }}'
+            ],
+            images_upload_url: '{{ route('imageupload') }}',
+            images_upload_credentials: true,
+            convert_urls: false
+        });
+
+    </script>
+
 @endsection

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController as SiteHomeController;
+use App\Http\Controllers\Site\PageController as SitePageController;
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -51,3 +52,5 @@ Route::prefix('painel')->group(function () {
         Route::resource('pages', PageController::class);
     });
 });
+
+Route::fallback([SitePageController::class, 'index']);

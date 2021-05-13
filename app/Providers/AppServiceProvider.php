@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+
+use App\Models\Page;
+use App\Models\Setting;
+use Hamcrest\Core\Set;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        //Menu
+        $frontMenu = [
+            '/' => 'Home'
+        ];
+
+        $pages = Page::all();
+        foreach ($pages as $page) {
+            $frontMenu[$page['slug']] = $page['title'];
+        }
+
+        View::share('front_menu', $frontMenu);
+
+        //Config
+        $config = [];
+
+        $settings = Setting::all();
+        foreach ($settings as $setting) {
+            $config[$setting['name']] = $setting['content'];
+        }
+
+        View::share('front_config', $config);
     }
 }
